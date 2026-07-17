@@ -1,6 +1,8 @@
 import "./styles.css"
+import { newProject } from "./modules/dom.js";
 
 const navbar = document.querySelectorAll('.project')
+// const input = document.querySelector('#my-projects')
 
 navbar.forEach(button => {
     button.addEventListener('click', (e) => {
