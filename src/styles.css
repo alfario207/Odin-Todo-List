@@ -17,7 +17,7 @@ html, body {
 }
 
 .side-bar h1 {
-    font-size: 32px;
+    font-size: 30px;
     color: #00F0FF;
     text-align: center;
 }
@@ -27,7 +27,7 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     background-color: #1C1B1B;
     padding: 1rem;
     border-right: 1px solid #3B494B;
@@ -36,7 +36,27 @@ html, body {
 .project-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.projects .project {
+    justify-content: space-between;
+}
+
+.projects .project img {
+    width: 20px;
+    height: 20px;
+}
+
+.project-btn {
+    display: flex;
+    gap: 15px;
 }
 
 .project {
@@ -46,7 +66,11 @@ html, body {
     padding-block: 12px;
     gap: 10px;
     cursor: pointer;
-    z-index: 1;
+}
+
+.project:hover {
+    background-color: #00eeff3e;
+    border-radius: 8px;
 }
 
 .project img {
@@ -55,25 +79,18 @@ html, body {
 
 .project.selected {
     background-color: #00eeff3e;
-    border-radius: 10px;
-    color: #00F0FF;
-}
-
-.project.selected img {
-    filter: invert(66%) sepia(87%) saturate(3015%) hue-rotate(141deg) brightness(103%) contrast(105%);
+    border-radius: 8px;
 }
 
 .project-title {
     display: flex;
     align-items: center;
-    padding-inline: 10px;
-    gap: 15px;
+    padding: 12px 10px;
+    gap: 10px;
 }
 
 .project-title h2 {
-    font-size: 20px;
-    /* padding-left: 10px; */
-    margin-block: 1rem;
+    font-size: 1rem;
 }
 
 .project-title img {
@@ -82,15 +99,53 @@ html, body {
     filter: invert(100%);
 }
 
+.projects-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.projects-form.visibility {
+    display: none;
+}
+
+.input-form {
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    width: 100%;
+    padding: 6px;
+}
+
+.projects-form-btn {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+}
+
+.projects-form-btn button {
+    width: 70px;
+    padding: 8px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 .new-btn {
     border: none;
     outline: none;
     background: #00F0FF;
     color: #00363A;
     padding: 13px;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+}
+
+.new-btn.visibility {
+    display: none;
 }
 
 .new-btn:hover {

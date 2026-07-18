@@ -1,16 +1,18 @@
 import "./styles.css"
-import { newProject } from "./modules/dom.js";
+import { newProject } from "./modules/dom.js"
 
-const navbar = document.querySelectorAll('.project')
-// const input = document.querySelector('#my-projects')
+const sideBar = document.querySelector('.side-bar')
 
-navbar.forEach(button => {
-    button.addEventListener('click', (e) => {
-        const id = e.currentTarget.id
-        console.log('btn clicked id=',id)
+sideBar.addEventListener('click', (e) => {
+    const projectBtn = e.target.closest('.project')
 
-        navbar.forEach(nav => nav.classList.remove('selected'))
-        
-        e.currentTarget.classList.add('selected');
-    })
+    if (!projectBtn) return
+
+    const currentNavbar = sideBar.querySelectorAll('.project')
+
+    currentNavbar.forEach(nav => nav.classList.remove('selected'))
+
+    projectBtn.classList.add('selected')
 })
+
+newProject()
