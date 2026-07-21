@@ -1,6 +1,6 @@
 import Project from "../classes/Projects.js"
 
-const projects = []
+let projects = []
 
 function createProject(name) {
     const project = new Project(name)
@@ -13,4 +13,8 @@ function getProjects() {
     return projects
 }
 
-export { createProject, getProjects }
+function deleteProject(name) {
+    projects = projects.filter(project => project.name !== name)
+}
+
+export { createProject, getProjects, deleteProject }
