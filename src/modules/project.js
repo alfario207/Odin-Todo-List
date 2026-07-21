@@ -1,9 +1,16 @@
-function deleteProject() {
+import Project from "../classes/Projects.js"
 
+const projects = []
+
+function createProject(name) {
+    const project = new Project(name)
+
+    projects.push(project)
+    console.log(projects)
 }
 
-function editProject(id) {
-    
+function getProjects() {
+    return projects
 }
 
-export { deleteProject, editProject }
+export { createProject, getProjects }

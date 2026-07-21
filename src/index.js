@@ -1,5 +1,5 @@
 import "./styles.css"
-import { newProject } from "./modules/dom.js"
+import { setupProjectForm } from "./modules/dom.js"
 
 const sideBar = document.querySelector('.side-bar')
 
@@ -15,4 +15,4 @@ sideBar.addEventListener('click', (e) => {
     projectBtn.classList.add('selected')
 })
 
-newProject()
+setupProjectForm()
