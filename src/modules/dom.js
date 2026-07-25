@@ -33,18 +33,12 @@ function createProjectItem(project) {
 
         addProjectsForm()
 
-        console.log(isEdit)
-        console.log('Btn EDit',project)
-
         if (isEdit) {
-            editedProject=project
-            editProject(editedProject,input.value)
+            editedProject = project
 
-            console.log(isEdit, input)
-            
+            editProject(editedProject, input.value)
         } else {
            createProject(input.value)
-           
         }
     })
 
@@ -55,7 +49,6 @@ function createProjectItem(project) {
     del.addEventListener('click', () => {
         deleteProject(project.name)
         renderProjects()
-        console.log('deleted', project)
     })
 
     projectBtn.append(edit, del)
@@ -66,7 +59,7 @@ function createProjectItem(project) {
 
 function renderProjects() {
     const projects = getProjects()
-console.log("projECT",projects)
+
     myProjects.innerHTML = ''
 
     projects.forEach(project => {
@@ -96,7 +89,6 @@ function setupProjectForm() {
         e.preventDefault()
 
         const projectName = input.value.trim()
-        console.log('SUBMIT',isEdit,projectName)
 
         if (isEdit) {
             editProject(editedProject,projectName)
