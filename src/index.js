@@ -1,5 +1,5 @@
 import "./styles.css"
-import { setupProjectForm } from "./modules/dom.js"
+import { setupProjectForm } from "./modules/dom-project.js"
 
 const sideBar = document.querySelector('.side-bar')
 
