@@ -1,12 +1,15 @@
 import editImg from '../assets/edit.svg'
 import deleteImg from '../assets/delete.svg'
-import { createProject, getProjects, deleteProject } from './project.js'
+import { createProject, getProjects, deleteProject, editProject } from './project.js'
 
 const myProjects = document.getElementById('my-projects')
 const newBtn = document.querySelector('#new-project')
 const form = document.querySelector('.projects-form') 
 const input = document.querySelector('.input-form')
 const cancel = document.querySelector('.cancel-btn')
+
+let isEdit = false
+let editedProject = null
 
 function createProjectItem(project) {
     const projectElement = document.createElement('div')
@@ -23,6 +26,27 @@ function createProjectItem(project) {
     const edit = document.createElement('img')
     edit.src = editImg
     edit.alt = 'edit icon'
+
+    edit.addEventListener('click', () => {
+        input.value = project.name
+        isEdit = true
+
+        addProjectsForm()
+
+        console.log(isEdit)
+        console.log('Btn EDit',project)
+
+        if (isEdit) {
+            editedProject=project
+            editProject(editedProject,input.value)
+
+            console.log(isEdit, input)
+            
+        } else {
+           createProject(input.value)
+           
+        }
+    })
 
     const del = document.createElement('img')
     del.src = deleteImg
@@ -42,7 +66,7 @@ function createProjectItem(project) {
 
 function renderProjects() {
     const projects = getProjects()
-
+console.log("projECT",projects)
     myProjects.innerHTML = ''
 
     projects.forEach(project => {
@@ -55,24 +79,31 @@ function closeProjectForm() {
     input.value = ''
     form.classList.add('visibility')
     newBtn.classList.remove('visibility')
-    // input.blur()
+}
+
+function addProjectsForm() {
+    newBtn.classList.add('visibility')
+    form.classList.remove('visibility') 
+    input.focus()
 }
 
 function setupProjectForm() {
     newBtn.addEventListener('click', () => {
-        newBtn.classList.add('visibility')
-        form.classList.remove('visibility')
-        input.focus()
+        addProjectsForm()
     })
     
     form.addEventListener('submit', (e) => {
         e.preventDefault()
 
         const projectName = input.value.trim()
+        console.log('SUBMIT',isEdit,projectName)
 
-        if (!projectName) return 
+        if (isEdit) {
+            editProject(editedProject,projectName)
+        } else {
+            createProject(projectName)
+        }
         
-        createProject(projectName)
         renderProjects()
         
         closeProjectForm()

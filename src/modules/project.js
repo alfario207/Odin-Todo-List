@@ -17,4 +17,15 @@ function deleteProject(name) {
     projects = projects.filter(project => project.name !== name)
 }
 
-export { createProject, getProjects, deleteProject }
+function editProject(obj,newName) {
+    console.log('PRAM',obj, newName)
+    obj.name = newName
+    // const project = projects.find(project => project.name === newName)
+    // project.name=newName
+    // console.log('edIT',project)
+
+    // projects
+    // return project
+}
+
+export { createProject, getProjects, deleteProject, editProject }
