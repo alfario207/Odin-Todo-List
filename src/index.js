@@ -1,5 +1,6 @@
 import "./styles.css"
 import { setupProjectForm } from "./modules/dom-project.js"
+import { createTodoItem, setUpTodosForm } from "./modules/dom-todo.js"
 
 const sideBar = document.querySelector('.side-bar')
 
@@ -16,3 +17,5 @@ sideBar.addEventListener('click', (e) => {
 })
 
 setupProjectForm()
+createTodoItem()
+setUpTodosForm()

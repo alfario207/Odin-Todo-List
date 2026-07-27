@@ -1,6 +1,6 @@
 import editImg from '../assets/edit.svg'
 import deleteImg from '../assets/delete.svg'
-import { createProject, getProjects, deleteProject, editProject } from './project.js'
+import { setSelectedProject, createProject, getProjects, deleteProject, editProject } from './project.js'
 
 const myProjects = document.getElementById('my-projects')
 const newBtn = document.querySelector('#new-project')
@@ -45,6 +45,10 @@ function createProjectItem(project) {
 
     projectBtn.append(edit, del)
     projectElement.append(name, projectBtn)
+
+    projectElement.addEventListener('click', () => {
+        setSelectedProject(project)
+    })
 
     return projectElement
 }

@@ -1,6 +1,15 @@
 import Project from "../classes/Projects.js"
 
 let projects = []
+let selectedProject = null
+
+function setSelectedProject(project) {
+    selectedProject = project
+}
+
+function getSelectedProject() {
+    return selectedProject
+}
 
 function createProject(name) {
     const project = new Project(name)
@@ -17,15 +26,8 @@ function deleteProject(name) {
     projects = projects.filter(project => project.name !== name)
 }
 
-function editProject(obj,newName) {
-    console.log('PRAM',obj, newName)
-    obj.name = newName
-    // const project = projects.find(project => project.name === newName)
-    // project.name=newName
-    // console.log('edIT',project)
-
-    // projects
-    // return project
+function editProject(project,newName) {
+    project.name = newName
 }
 
-export { createProject, getProjects, deleteProject, editProject }
+export { setSelectedProject, getSelectedProject, createProject, getProjects, deleteProject, editProject }
