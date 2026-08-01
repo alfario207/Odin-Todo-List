@@ -1,7 +1,8 @@
 import editImg from '../assets/edit.svg'
 import delImg from '../assets/delete.svg'
+import { createTodo, getTodos } from './todo.js'
 
-const todos = document.getElementById('todos')
+const myTodos = document.getElementById('todos')
 const newTask = document.getElementById('new-task')
 const form = document.querySelector('.todos-form')
 const close = document.querySelector('#close')
@@ -13,7 +14,7 @@ const priority = document.getElementById('priority')
 const date = document.getElementById('date')
 const notes = document.getElementById('notes')
 
-function createTodoItem() {
+function createTodoItem(todo) {
     const todoItem = document.createElement('div')
     todoItem.classList.add('todo-item')
 
@@ -30,10 +31,10 @@ function createTodoItem() {
     checkbox.type = 'checkbox'
     
     const title = document.createElement('h2')
-    title.textContent = `create react project`
+    title.textContent = todo.title
     
     const description = document.createElement('p')
-    description.textContent = `lorem ipsum `
+    description.textContent = todo.description
     
     const todoRight = document.createElement('div')
     todoRight.classList.add('todo-right')
@@ -42,13 +43,13 @@ function createTodoItem() {
     todoPriority.classList.add('todo-priority')
 
     const priority = document.createElement('p')
-    priority.textContent = `medium`
+    priority.textContent = todo.priority
     
     const todoDate = document.createElement('div')
     todoDate.classList.add('date')
     
     const date = document.createElement('p')
-    date.textContent = `18 jul`
+    date.textContent = todo.dueDate
     
     const todoBtn = document.createElement('div')
     todoBtn.classList.add('todo-btn')
@@ -68,13 +69,22 @@ function createTodoItem() {
     
     todoLeft.append(checkbox, todoTitle)
     todoRight.append(todoPriority, todoDate, todoBtn)
-    
     todoContent.append(todoLeft, todoRight)
 
     todoItem.appendChild(todoContent)
-    todos.appendChild(todoItem)
 
     return todoItem
+}
+
+function renderTodos() {
+    const todos = getTodos()
+    
+    myTodos.innerHTML = ''
+    todos.forEach(todo => {
+        const todoElement = createTodoItem(todo)
+        myTodos.appendChild(todoElement)
+        console.log(todo)
+    })
 }
 
 function clearTodoForm() {
@@ -98,15 +108,25 @@ function closeForm() {
     newTask.classList.remove('visibility')
 }
 
-function setUpTodosForm() {
+export default function setUpTodosForm() {
     newTask.addEventListener('click', () => {
         openForm()
     })
 
     form.addEventListener('submit', (e) => {
         e.preventDefault()
+        
+        const todoInput = {
+            title: title.value,
+            description: description.value,
+            dueDate: date.value,
+            priority: priority.value,
+            notes: notes.value
+        }
 
+        createTodo(todoInput)
 
+        renderTodos()
 
         closeForm()
     })
@@ -122,4 +142,4 @@ function setUpTodosForm() {
     })
 }
 
-export { createTodoItem, setUpTodosForm }
+export { setUpTodosForm }

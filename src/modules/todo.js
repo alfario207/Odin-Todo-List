@@ -3,7 +3,7 @@ import { getSelectedProject } from "./project.js";
 
 let todos = []
 
-function createTodo(title, description, dueDate, priority, notes) {
+function createTodo({ title, description, dueDate, priority, notes} ) {
     const project = getSelectedProject()
 
     const todo = new Todo(title, description, dueDate, priority, notes, project)
@@ -22,3 +22,5 @@ function deleteTodos() {
 function editTodos() {
     
 }
+
+export { createTodo, getTodos, deleteTodos, editTodos }
