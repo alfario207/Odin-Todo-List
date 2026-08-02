@@ -1,6 +1,6 @@
 import editImg from '../assets/edit.svg'
 import delImg from '../assets/delete.svg'
-import { createTodo, getTodos } from './todo.js'
+import { createTodo, getTodos, editTodos, deleteTodos } from './todo.js'
 
 const myTodos = document.getElementById('todos')
 const newTask = document.getElementById('new-task')
@@ -14,9 +14,12 @@ const priority = document.getElementById('priority')
 const date = document.getElementById('date')
 const notes = document.getElementById('notes')
 
+let editedTodos = null
+
 function createTodoItem(todo) {
     const todoItem = document.createElement('div')
     todoItem.classList.add('todo-item')
+    todoItem.setAttribute('id', `${todo.id}`)
 
     const todoContent = document.createElement('div')
     todoContent.classList.add('todo-item-content')
@@ -56,12 +59,25 @@ function createTodoItem(todo) {
     
     const edit = document.createElement('img')
     edit.src = editImg
-    edit.alt = 'edit icon'
+
+    edit.addEventListener('click', () => {
+        editedTodos = todo
+
+        title.value = todo.title
+        description.value = todo.description
+
+        openForm()
+    })
     
     const del = document.createElement('img')
     del.src = delImg
     del.alt = 'delete icon'
-    
+
+    del.addEventListener('click', () => {
+        deleteTodos(todo.id)
+        renderTodos()
+    })
+
     todoTitle.append(title, description)
     todoPriority.appendChild(priority)
     todoDate.appendChild(date)
@@ -80,10 +96,10 @@ function renderTodos() {
     const todos = getTodos()
     
     myTodos.innerHTML = ''
+
     todos.forEach(todo => {
         const todoElement = createTodoItem(todo)
         myTodos.appendChild(todoElement)
-        console.log(todo)
     })
 }
 
@@ -124,7 +140,13 @@ export default function setUpTodosForm() {
             notes: notes.value
         }
 
-        createTodo(todoInput)
+        if (!todoInput) return
+
+        if (editedTodos) {
+            editTodos(editedTodos, todoInput)
+        } else {
+            createTodo(todoInput)
+        }
 
         renderTodos()
 

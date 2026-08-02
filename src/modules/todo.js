@@ -15,12 +15,12 @@ function getTodos() {
     return todos
 }
 
-function deleteTodos() {
-
+function deleteTodos(id) {
+    todos = todos.filter(todo => todo.id !== id)
 }
 
 function editTodos() {
-    
+
 }
 
 export { createTodo, getTodos, deleteTodos, editTodos }
