@@ -208,6 +208,13 @@ html, body {
     justify-content: space-between;
 }
 
+.todo-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 4px;
+}
+
 .todo-title h2 {
     font-size: 18px;
 }
