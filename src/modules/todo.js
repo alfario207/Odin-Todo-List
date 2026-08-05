@@ -19,8 +19,11 @@ function deleteTodos(id) {
     todos = todos.filter(todo => todo.id !== id)
 }
 
-function editTodos() {
-
+function editTodos(todo, data) {
+    todo.title = data.title
+    todo.description = data.description
+    todo.dueDate = data.dueDate
+    todo.priority = data.priority
 }
 
 export { createTodo, getTodos, deleteTodos, editTodos }

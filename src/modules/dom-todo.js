@@ -14,7 +14,7 @@ const priority = document.getElementById('priority')
 const date = document.getElementById('date')
 const notes = document.getElementById('notes')
 
-let editedTodos = null
+let editedTodo = null
 
 function createTodoItem(todo) {
     const todoItem = document.createElement('div')
@@ -59,14 +59,12 @@ function createTodoItem(todo) {
     
     const edit = document.createElement('img')
     edit.src = editImg
+    edit.alt = 'edit icon'
 
     edit.addEventListener('click', () => {
-        editedTodos = todo
+        editedTodo = todo
 
-        title.value = todo.title
-        description.value = todo.description
-
-        openForm()
+        editForm(todo)
     })
     
     const del = document.createElement('img')
@@ -111,6 +109,15 @@ function clearTodoForm() {
     notes.value = ''
 }
 
+function editForm(todo) {
+    openForm()
+
+    title.value = todo.title
+    description.value = todo.description
+    date.value = todo.dueDate
+    priority.value = todo.priority
+}
+
 function openForm() {
     form.classList.remove('visibility')
     newTask.classList.add('visibility')
@@ -122,15 +129,19 @@ function closeForm() {
     clearTodoForm()
     form.classList.add('visibility')
     newTask.classList.remove('visibility')
+
+    editedTodo = null 
 }
 
-export default function setUpTodosForm() {
+function setUpTodosForm() {
     newTask.addEventListener('click', () => {
         openForm()
     })
 
     form.addEventListener('submit', (e) => {
         e.preventDefault()
+
+        console.log('submited')
         
         const todoInput = {
             title: title.value,
@@ -142,8 +153,8 @@ export default function setUpTodosForm() {
 
         if (!todoInput) return
 
-        if (editedTodos) {
-            editTodos(editedTodos, todoInput)
+        if (editedTodo) {
+            editTodos(editedTodo, todoInput)
         } else {
             createTodo(todoInput)
         }
