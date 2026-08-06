@@ -140,8 +140,6 @@ function setUpTodosForm() {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault()
-
-        console.log('submited')
         
         const todoInput = {
             title: title.value,
