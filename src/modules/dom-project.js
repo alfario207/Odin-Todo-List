@@ -1,6 +1,7 @@
 import editImg from '../assets/edit.svg'
 import deleteImg from '../assets/delete.svg'
 import { setSelectedProject, createProject, getProjects, deleteProject, editProject } from './project.js'
+import { renderTodos } from './dom-todo.js'
 
 const myProjects = document.getElementById('my-projects')
 const newBtn = document.querySelector('#new-project')
@@ -38,8 +39,11 @@ function createProjectItem(project) {
     del.src = deleteImg
     del.alt = 'delete icon'
 
-    del.addEventListener('click', () => {
+    del.addEventListener('click', (e) => {
+        e.stopPropagation()
+
         deleteProject(project.name)
+
         renderProjects()
     })
 
@@ -48,6 +52,10 @@ function createProjectItem(project) {
 
     projectElement.addEventListener('click', () => {
         setSelectedProject(project)
+        
+        renderTodos(project)
+
+        console.log(project)
     })
 
     return projectElement

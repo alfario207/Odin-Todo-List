@@ -1,6 +1,7 @@
 import editImg from '../assets/edit.svg'
 import delImg from '../assets/delete.svg'
 import { createTodo, getTodos, editTodos, deleteTodos } from './todo.js'
+import { getSelectedProject } from './project.js'
 
 const myTodos = document.getElementById('todos')
 const newTask = document.getElementById('new-task')
@@ -73,7 +74,7 @@ function createTodoItem(todo) {
 
     del.addEventListener('click', () => {
         deleteTodos(todo.id)
-        renderTodos()
+        renderTodos(getSelectedProject())
     })
 
     todoTitle.append(title, description)
@@ -90,12 +91,16 @@ function createTodoItem(todo) {
     return todoItem
 }
 
-function renderTodos() {
+function renderTodos(project = null) {
     const todos = getTodos()
     
     myTodos.innerHTML = ''
 
-    todos.forEach(todo => {
+    const filteredTodos = project
+        ? todos.filter(todo => todo.project === project)
+        : todos
+
+    filteredTodos.forEach(todo => {
         const todoElement = createTodoItem(todo)
         myTodos.appendChild(todoElement)
     })
@@ -157,7 +162,7 @@ function setUpTodosForm() {
             createTodo(todoInput)
         }
 
-        renderTodos()
+        renderTodos(getSelectedProject())
 
         closeForm()
     })
@@ -173,4 +178,4 @@ function setUpTodosForm() {
     })
 }
 
-export { setUpTodosForm }
+export { setUpTodosForm, renderTodos }

@@ -1,6 +1,7 @@
 import "./styles.css"
 import { setupProjectForm } from "./modules/dom-project.js"
-import { setUpTodosForm } from "./modules/dom-todo.js"
+import { setUpTodosForm, renderTodos } from "./modules/dom-todo.js"
+import { setSelectedProject } from "./modules/project.js"
 
 const sideBar = document.querySelector('.side-bar')
 
@@ -14,6 +15,15 @@ sideBar.addEventListener('click', (e) => {
     currentNavbar.forEach(nav => nav.classList.remove('selected'))
 
     projectBtn.classList.add('selected')
+
+})
+
+const allTask = document.getElementById('all-task')
+
+allTask.addEventListener('click', () => {
+    setSelectedProject(null)
+
+    renderTodos()
 })
 
 setupProjectForm()

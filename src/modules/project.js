@@ -15,7 +15,6 @@ function createProject(name) {
     const project = new Project(name)
 
     projects.push(project)
-    console.log(projects)
 }
 
 function getProjects() {
