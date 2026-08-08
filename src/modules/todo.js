@@ -9,6 +9,8 @@ function createTodo({ title, description, dueDate, priority, notes} ) {
     const todo = new Todo(title, description, dueDate, priority, notes, project)
 
     todos.push(todo)
+
+    if (project) project.todos.push(todo)
 }
 
 function getTodos() {
